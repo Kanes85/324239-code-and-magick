@@ -1,16 +1,16 @@
 'use strict';
 
-var CLOUD_WIDTH = 420; //Ширина таблички
-var CLOUD_HEIGHT = 270; //Высота таблички
-var CLOUD_X = 100; //Положение таблички по горизонтали (координата X)
-var CLOUD_Y = 10; //Положение таблички по вертикали (координата Y)
-var GAP = 10; //Шаг
-var TEXT_HEIGHT = 100; //Высота текстового поля с поздравленнием
-var FONT_GAP = 20; //Шаг шрифта
-var BAR_WIDTH = 40; //Ширина столбца
-var BAR_HEIGHT = CLOUD_HEIGHT - TEXT_HEIGHT - (GAP * 2); //высота столбца
-var GAP_BAR = 50; //Расстоние между столбцами
-var WIDTH_SCORE = 30; //Высота строки с очками
+var CLOUD_WIDTH = 420; // Ширина таблички
+var CLOUD_HEIGHT = 270; // Высота таблички
+var CLOUD_X = 100; // Положение таблички по горизонтали (координата X)
+var CLOUD_Y = 10; // Положение таблички по вертикали (координата Y)
+var GAP = 10; // Шаг
+var TEXT_HEIGHT = 100; // Высота текстового поля с поздравленнием
+var FONT_GAP = 20; // Шаг шрифта
+var BAR_WIDTH = 40; // Ширина столбца
+var BAR_HEIGHT = CLOUD_HEIGHT - TEXT_HEIGHT - (GAP * 2); // высота столбца
+var GAP_BAR = 50; // Расстоние между столбцами
+var WIDTH_SCORE = 30; // Высота строки с очками
 
 // Отрисовка таблички
 var renderCloud = function (ctx, x, y, color) {
@@ -18,7 +18,7 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function(arr) {
+var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
   for (var i = 0; i < arr.length; i++) {
@@ -44,7 +44,7 @@ var renderStatistics = function (ctx, players, times) {
   var maxTime = getMaxElement(times);
 
   // Массив-объект ироков и цветов столбцов
-  var players = [
+  var playersDate = [
     {name: 'Вы', color: 'rgb(255, 0, 0, 1)'},
     {name: 'Кекс', color: 'rgba(0, 72, 255, 0.9)'},
     {name: 'Катя', color: 'rgba(55, 102, 221, 0.5)'},
@@ -52,16 +52,16 @@ var renderStatistics = function (ctx, players, times) {
   ];
 
   // Цикл отрисовки столб и результатов
-  for (var i = 0; i < players.length; i++) {
+  for (var i = 0; i < playersDate.length; i++) {
     // Цвет имен игроков
     ctx.fillStyle = '#000000';
     // Количество очков грока и их расположение
-    ctx.fillText(Math.floor(times[i]), BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i,  BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - WIDTH_SCORE);
+    ctx.fillText(Math.floor(times[i]), BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - WIDTH_SCORE);
     // Имя игрока и его расположение
-    ctx.fillText(players[i].name, BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, TEXT_HEIGHT + BAR_HEIGHT);
+    ctx.fillText(playersDate[i].name, BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, TEXT_HEIGHT + BAR_HEIGHT);
     // Цвет столбцов
-    ctx.fillStyle = players[i].color;
+    ctx.fillStyle = playersDate[i].color;
     // Столбцы результата
-    ctx.fillRect(BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i,  BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - GAP, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
+    ctx.fillRect(BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - GAP, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
   }
 };
