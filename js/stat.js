@@ -10,6 +10,7 @@ var FONT_GAP = 20; //Шаг шрифта
 var BAR_WIDTH = 40; //Ширина столбца
 var BAR_HEIGHT = CLOUD_HEIGHT - TEXT_HEIGHT - (GAP * 2); //высота столбца
 var GAP_BAR = 50;
+var WIDTH_SCORE = 30;
 
 // var NAMES = ['ВЫ', 'Кекс', 'Катя', 'Игорь']; //Массив имен игроков
 
@@ -19,8 +20,19 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
+var getMaxElement = function(arr) {
+  var maxElement = arr[0];
+
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > maxElement) {
+      maxElement = arr[i];
+    }
+  }
+  return maxElement;
+};
+
 // Табличка с данными
-var renderStatistics = function (ctx, names, times) {
+var renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
 
@@ -30,23 +42,17 @@ var renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', CLOUD_WIDTH / 2, FONT_GAP);
   ctx.fillText('Список результатов:', CLOUD_WIDTH / 2, FONT_GAP * 2);
 
-  ctx.fillStyle = '#000000';
-  ctx.fillText('Вы', CLOUD_X + GAP_BAR, 250);
-  ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-  ctx.fillRect(150, 90, BAR_WIDTH, BAR_HEIGHT);
+  // var players = ['Вы', 'Кекс', 'Катя', 'Алеся'];
 
-  ctx.fillStyle = '#000000';
-  ctx.fillText('Кекс', 240, 250);
-  ctx.fillStyle = 'rgba(0, 72, 255, 0.9)';
-  ctx.fillRect(240, 90, BAR_WIDTH, 150);
+  var maxTime = getMaxElement(times);
 
-  ctx.fillStyle = '#000000';
-  ctx.fillText('Катя', 330, 250);
-  ctx.fillStyle = 'rgba(55, 102, 221, 0.5)';
-  ctx.fillRect(330, 90, BAR_WIDTH, 150);
+  for (var i = 0; i < players.length; i++) {
+    ctx.fillStyle = '#000000';
 
-  ctx.fillStyle = '#000000';
-  ctx.fillText('Игорь', 420, 250);
-  ctx.fillStyle = 'rgba(25, 61, 154, 0.7)';
-  ctx.fillRect(420, 90, BAR_WIDTH, 150);
+    ctx.fillText(Math.floor(times[i]), BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i,  BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - WIDTH_SCORE);
+
+    ctx.fillText(players[i], BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, TEXT_HEIGHT + BAR_HEIGHT);
+
+    ctx.fillRect(BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i,  BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - GAP, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
+  }
 };
