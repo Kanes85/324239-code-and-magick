@@ -9,8 +9,8 @@ var TEXT_HEIGHT = 100; //Высота текстового поля с позд�
 var FONT_GAP = 20; //Шаг шрифта
 var BAR_WIDTH = 40; //Ширина столбца
 var BAR_HEIGHT = CLOUD_HEIGHT - TEXT_HEIGHT - (GAP * 2); //высота столбца
-var GAP_BAR = 50;
-var WIDTH_SCORE = 30;
+var GAP_BAR = 50; //Расстоние между столбцами
+var WIDTH_SCORE = 30; //Высота строки с очками
 
 // Отрисовка таблички
 var renderCloud = function (ctx, x, y, color) {
@@ -34,6 +34,7 @@ var renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
 
+  // Текст поздравления
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'top';
   ctx.fillStyle = '#000000';
@@ -42,6 +43,7 @@ var renderStatistics = function (ctx, players, times) {
 
   var maxTime = getMaxElement(times);
 
+  // Массив-объект ироков и цветов столбцов
   var players = [
     {name: 'Вы', color: 'rgb(255, 0, 0, 1)'},
     {name: 'Кекс', color: 'rgba(0, 72, 255, 0.9)'},
@@ -49,15 +51,17 @@ var renderStatistics = function (ctx, players, times) {
     {name: 'Алеся', color: 'rgba(25, 61, 154, 0.7)'}
   ];
 
+  // Цикл отрисовки столб и результатов
   for (var i = 0; i < players.length; i++) {
+    // Цвет имен игроков
     ctx.fillStyle = '#000000';
-
+    // Количество очков грока и их расположение
     ctx.fillText(Math.floor(times[i]), BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i,  BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - WIDTH_SCORE);
-
+    // Имя игрока и его расположение
     ctx.fillText(players[i].name, BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, TEXT_HEIGHT + BAR_HEIGHT);
-
+    // Цвет столбцов
     ctx.fillStyle = players[i].color;
-
+    // Столбцы результата
     ctx.fillRect(BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i,  BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - GAP, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
   }
 };
