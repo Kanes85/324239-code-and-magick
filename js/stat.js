@@ -43,24 +43,25 @@ var renderStatistics = function (ctx, players, times) {
 
   var maxTime = getMaxElement(times);
 
-  // Массив-объект ироков и цветов столбцов
-  var playersDate = [
-    {name: 'Вы', color: 'rgb(255, 0, 0, 1)'},
-    {name: 'Кекс', color: 'rgba(0, 72, 255, 0.9)'},
-    {name: 'Катя', color: 'rgba(55, 102, 221, 0.5)'},
-    {name: 'Алеся', color: 'rgba(25, 61, 154, 0.7)'}
-  ];
+  // Функция вызова цвета баров игроков
+  function colorBar(name) {
+    if (name === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = 'rgba(0, 0, 255, ' + Math.random() + ')';
+    }
+  }
 
   // Цикл отрисовки столб и результатов
-  for (var i = 0; i < playersDate.length; i++) {
+  for (var i = 0; i < players.length; i++) {
     // Цвет имен игроков
     ctx.fillStyle = '#000000';
-    // Количество очков грока и их расположение
+    // Количество очков игрока и их расположение
     ctx.fillText(Math.floor(times[i]), BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - WIDTH_SCORE);
     // Имя игрока и его расположение
-    ctx.fillText(playersDate[i].name, BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, TEXT_HEIGHT + BAR_HEIGHT);
+    ctx.fillText(players[i], BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, TEXT_HEIGHT + BAR_HEIGHT);
     // Цвет столбцов
-    ctx.fillStyle = playersDate[i].color;
+    ctx.fillStyle = colorBar(players[i]);
     // Столбцы результата
     ctx.fillRect(BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - GAP, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
   }
