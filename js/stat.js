@@ -66,5 +66,3 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillRect(BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - GAP, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
   }
 };
-
-window = renderStatistics;
