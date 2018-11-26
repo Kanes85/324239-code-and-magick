@@ -30,7 +30,7 @@ var getMaxElement = function (arr) {
 };
 
 // Табличка с данными
-var renderStatistics = function (ctx, players, times) {
+window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
 
@@ -66,3 +66,5 @@ var renderStatistics = function (ctx, players, times) {
     ctx.fillRect(BAR_HEIGHT + (BAR_WIDTH + GAP_BAR) * i, BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime + TEXT_HEIGHT - GAP, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
   }
 };
+
+window = renderStatistics;
