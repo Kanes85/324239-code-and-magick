@@ -45,28 +45,19 @@ var colorEyas = [
   'green'
 ];
 
-function renderWizards() {
-  var similarWizards = generateWizards();
-  var fragment = document.createDocumentFragment();
-
-  for (var i = 0; i < similarWizards.length; i++) {
-    fragment.appendChild(renderWizard(similarWizards[i]));
-  }
-  similarListElement.appendChild(fragment);
-}
 
 var setupSimilarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
+// var renderWizards = function (wizard) {
     for (var i = 0; i < 4; i++) {
       var randomName = firstName[Math.floor(Math.random() * firstName.length)];
       var randomSurname = surName[Math.floor(Math.random() * surName.length)];
       var wizardName = [randomName, randomSurname].join('\n');
       var coatColor = colorMantle[Math.floor(Math.random() * colorMantle.length)];
-
-    var eyesColor = colorEyas[Math.floor(Math.random() * colorEyas.length)];
+      var eyesColor = colorEyas[Math.floor(Math.random() * colorEyas.length)];
 
     var wizards = {
       name: wizardName,
@@ -74,7 +65,8 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
       eyesColor: eyesColor
     };
     console.log(wizards);
-    };
+  };
+
 
 
 for (var i = 0; i < 4; i++) {
@@ -85,16 +77,12 @@ for (var i = 0; i < 4; i++) {
   setupSimilarList.appendChild(wizardElement);
 };
 
-// function renderWizard(wizard) {
-//   var wizardElement = similarWizardTemplate.cloneNode(true);
-//   wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
-//     wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
-//     wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
-//   return wizardElement;
-// }
+function renderWizards() {
+  var similarWizards = generateWizards();
+  var fragment = document.createDocumentFragment();
 
-// var fragment = document.createDocumentFragment();
-// for (var i = 0; i < 4; i++) {
-//   fragment.appendChild(renderWizard(wizards));
-// }
-// similarListElement.appendChild(fragment);
+  for (var i = 0; i < 4; i++) {
+    fragment.appendChild(renderWizard(similarWizards[i]));
+  }
+  similarListElement.appendChild(fragment);
+}
