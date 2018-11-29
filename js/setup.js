@@ -59,12 +59,12 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
       var coatColor = colorMantle[Math.floor(Math.random() * colorMantle.length)];
       var eyesColor = colorEyas[Math.floor(Math.random() * colorEyas.length)];
 
-    var wizards = {
+    var wizard = {
       name: wizardName,
       coatColor: coatColor,
       eyesColor: eyesColor
     };
-    console.log(wizards);
+    console.log(wizard);
   };
 
 
