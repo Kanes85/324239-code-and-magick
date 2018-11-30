@@ -10,6 +10,8 @@ var firstName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кр�
 var surName = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var colorMantle = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var colorEyas = ['black', 'red', 'blue', 'yellow', 'green'];
+var wizards = {};
+var COUNT = 4;
 
 var generateWizard = function () {
   var randomName = firstName[Math.floor(Math.random() * firstName.length)];
@@ -18,26 +20,10 @@ var generateWizard = function () {
   var coatColor = colorMantle[Math.floor(Math.random() * colorMantle.length)];
   var eyesColor = colorEyas[Math.floor(Math.random() * colorEyas.length)];
 
-
-    var wizards = {
-      name: wizardName,
-      coat: coatColor,
-      eyes: eyesColor
-    };
-    return wizards;
+  wizards.name = wizardName;
+  wizards.coat = coatColor;
+  wizards.eyes = eyesColor;
 };
-
-var wizardi = function () {
-var winki = [];
-for(var i = 0; i < 4; i++) {
-
-winki.push(generateWizard());
-console.log(winki);
-};
-};
-wizardi();
-
-
 
 var setupSimilarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -46,16 +32,15 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
 
 var renderWizard = function () {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = wizardi.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizardi.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizardi.eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coat;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyes;
   return wizardElement;
 };
 
-
-
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < 4; i++) {
-  fragment.appendChild(renderWizard(wizardi[i]));
+for (var i = 0; i < COUNT; i++) {
+  generateWizard();
+  fragment.appendChild(renderWizard(wizards[i]));
 }
 setupSimilarList.appendChild(fragment);
