@@ -10,7 +10,7 @@ var firstName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кр�
 var surName = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var colorMantle = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var colorEyas = ['black', 'red', 'blue', 'yellow', 'green'];
-var wizard = {};
+// var wizard = {};
 var COUNT = 4;
 
 var generateElement = function (property) {
@@ -25,21 +25,19 @@ var generateWizard = function () {
   var coatColor = generateElement(colorMantle);
   var eyesColor = generateElement(colorEyas);
 
-  // var wizard = {};
+  var wizard = {};
   wizard.name = wizardName;
   wizard.coat = coatColor;
   wizard.eyes = eyesColor;
-  console.log(wizard);
   return wizard;
 };
-
 
 var setupSimilarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-var renderWizard = function (wizards) {
+var renderWizard = function () {
   var wizardElement = similarWizardTemplate.cloneNode(true);
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coat;
