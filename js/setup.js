@@ -29,6 +29,7 @@ var generateWizard = function () {
   wizard.name = wizardName;
   wizard.coat = coatColor;
   wizard.eyes = eyesColor;
+
   return wizard;
 };
 
@@ -47,7 +48,7 @@ var renderWizard = function () {
 
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < COUNT; i++) {
-  generateWizard();
-  fragment.appendChild(renderWizard(wizard));
+  var wizard = generateWizard();
+  fragment.appendChild(renderWizard());
 }
 setupSimilarList.appendChild(fragment);
