@@ -10,55 +10,45 @@ var firstName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кр�
 var surName = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var colorMantle = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var colorEyas = ['black', 'red', 'blue', 'yellow', 'green'];
+var COUNT = 4;
+
+var generateElement = function (property) {
+  var element = property[Math.floor(Math.random() * property.length)];
+  return element;
+};
 
 var generateWizard = function () {
-
-  var randomName = firstName[Math.floor(Math.random() * firstName.length)];
-  var randomSurname = surName[Math.floor(Math.random() * surName.length)];
+  var randomName = generateElement(firstName);
+  var randomSurname = generateElement(surName);
   var wizardName = [randomName, randomSurname].join('\n');
-  var coatColor = colorMantle[Math.floor(Math.random() * colorMantle.length)];
-  var eyesColor = colorEyas[Math.floor(Math.random() * colorEyas.length)];
+  var coatColor = generateElement(colorMantle);
+  var eyesColor = generateElement(colorEyas);
 
+  var wizard = {};
+  wizard.name = wizardName;
+  wizard.coat = coatColor;
+  wizard.eyes = eyesColor;
 
-    var wizards = {
-      name: wizardName,
-      coat: coatColor,
-      eyes: eyesColor
-    };
-    console.log(wizards);
+  return wizard;
 };
-
-
-//   for (var i = 0; i < 4; i++) {
-//     generateWizard();
-// };
-
-var getDataWizard = function () {
-  var data = [];
-  for (var i = 0; i < 4; i++) {
-  data.push(generateWizard());
-  console.log(data);
-  };
-};
-getDataWizard();
 
 var setupSimilarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-var renderWizard = function () {
+// сюда лучше передавать wizard как параметр. Я не понимаю
+var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
-
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coat;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyes;
   return wizardElement;
 };
 
-
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < 4; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
+for (var i = 0; i < COUNT; i++) {
+  var wizard = generateWizard();
+  fragment.appendChild(renderWizard());
 }
 setupSimilarList.appendChild(fragment);
