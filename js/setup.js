@@ -10,37 +10,46 @@ var firstName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кр�
 var surName = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var colorMantle = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var colorEyas = ['black', 'red', 'blue', 'yellow', 'green'];
-var wizards = {};
+var wizard = {};
 var COUNT = 4;
 
-var generateWizard = function () {
-  var randomName = firstName[Math.floor(Math.random() * firstName.length)];
-  var randomSurname = surName[Math.floor(Math.random() * surName.length)];
-  var wizardName = [randomName, randomSurname].join('\n');
-  var coatColor = colorMantle[Math.floor(Math.random() * colorMantle.length)];
-  var eyesColor = colorEyas[Math.floor(Math.random() * colorEyas.length)];
-
-  wizards.name = wizardName;
-  wizards.coat = coatColor;
-  wizards.eyes = eyesColor;
+var generateElement = function (property) {
+  var element = property[Math.floor(Math.random() * property.length)];
+  return element;
 };
+
+var generateWizard = function () {
+  var randomName = generateElement(firstName);
+  var randomSurname = generateElement(surName);
+  var wizardName = [randomName, randomSurname].join('\n');
+  var coatColor = generateElement(colorMantle);
+  var eyesColor = generateElement(colorEyas);
+
+  // var wizard = {};
+  wizard.name = wizardName;
+  wizard.coat = coatColor;
+  wizard.eyes = eyesColor;
+  console.log(wizard);
+  return wizard;
+};
+
 
 var setupSimilarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-var renderWizard = function () {
+var renderWizard = function (wizards) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coat;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyes;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coat;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyes;
   return wizardElement;
 };
 
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < COUNT; i++) {
   generateWizard();
-  fragment.appendChild(renderWizard(wizards[i]));
+  fragment.appendChild(renderWizard(wizard));
 }
 setupSimilarList.appendChild(fragment);
