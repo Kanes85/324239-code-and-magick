@@ -12,6 +12,7 @@ var colorMantle = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var colorEyas = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var generateWizard = function () {
+
   var randomName = firstName[Math.floor(Math.random() * firstName.length)];
   var randomSurname = surName[Math.floor(Math.random() * surName.length)];
   var wizardName = [randomName, randomSurname].join('\n');
@@ -24,20 +25,22 @@ var generateWizard = function () {
       coat: coatColor,
       eyes: eyesColor
     };
-    return wizards;
+    console.log(wizards);
 };
 
-var wizardi = function () {
-// var winki = [];
-for(var i = 0; i < 4; i++) {
-  var winki = [];
-  winki.push(generateWizard());
-console.log(winki);
-};
-};
-wizardi();
 
+//   for (var i = 0; i < 4; i++) {
+//     generateWizard();
+// };
 
+var getDataWizard = function () {
+  var data = [];
+  for (var i = 0; i < 4; i++) {
+  data.push(generateWizard());
+  console.log(data);
+  };
+};
+getDataWizard();
 
 var setupSimilarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -46,16 +49,16 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
 
 var renderWizard = function () {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = wizardi[i].name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizardi.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizardi.eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
+
   return wizardElement;
 };
 
 
-
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < 4; i++) {
-  fragment.appendChild(renderWizard(wizardi[i]));
+  fragment.appendChild(renderWizard(wizards[i]));
 }
 setupSimilarList.appendChild(fragment);
