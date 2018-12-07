@@ -37,18 +37,17 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-// сюда лучше передавать wizard как параметр. Я не понимаю
-var renderWizard = function (wizard) {
+var renderWizard = function (atribute) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coat;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyes;
+  wizardElement.querySelector('.setup-similar-label').textContent = atribute.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = atribute.coat;
+  wizardElement.querySelector('.wizard-eyes').style.fill = atribute.eyes;
   return wizardElement;
 };
 
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < COUNT; i++) {
   var wizard = generateWizard();
-  fragment.appendChild(renderWizard());
+  fragment.appendChild(renderWizard(wizard));
 }
 setupSimilarList.appendChild(fragment);
