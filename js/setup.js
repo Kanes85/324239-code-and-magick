@@ -37,11 +37,11 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-var renderWizard = function () {
+var renderWizard = function (atribute) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coat;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyes;
+  wizardElement.querySelector('.setup-similar-label').textContent = atribute.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = atribute.coat;
+  wizardElement.querySelector('.wizard-eyes').style.fill = atribute.eyes;
   return wizardElement;
 };
 
